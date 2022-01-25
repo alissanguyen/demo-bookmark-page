@@ -1,0 +1,27 @@
+@use '../utilities/' as *;
+
+.desktop-nav {
+    $root: &;
+    display: flex;
+    align-items: center;
+    gap: clamp(2.5rem, 4vw, 3.125rem);
+
+    &__list {
+        display: flex;
+        gap: clamp(2.1875rem, 4vw, 2.8125rem);
+    }
+
+    &__item {
+        text-transform: uppercase;
+        font-size: 0.83rem;
+        letter-spacing: 0.08rem;
+        color: $c-blue-dark;
+        transition: color 350ms ease-in-out;
+
+        @include breakpoint(md) {
+            &:hover {
+                color: $c-red-soft;
+            }
+        }
+    }
+}

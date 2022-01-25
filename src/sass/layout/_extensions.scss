@@ -1,0 +1,116 @@
+@use '../utilities/' as *;
+
+.extensions {
+    $root: &;
+    padding: 0 12px;
+
+    @include breakpoint(xs) {
+        padding: 0 32px;
+    }
+
+    &__container {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin-bottom: 140px;
+
+        @include breakpoint(lg) {
+            margin-bottom: 157px;
+        }
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__text {
+        text-align: center;
+        margin-top: 13px;
+        max-width: 550px;
+
+        @include breakpoint(md) {
+            margin-top: 23px;
+        }
+    }
+
+    &__card-wrapper {
+        display: flex;
+        flex-flow: wrap;
+        gap: 39px;
+        margin-top: 38px;
+        width: 90%;
+
+        @include breakpoint(lg) {
+            flex-flow: row;
+            justify-content: space-between;
+            gap: 33px;
+            width: 90%;
+            height: 450px;
+            margin-top: 48px;
+        }
+
+        @media (min-width: 1200px) {
+            width: 82.4%;
+        }
+    }
+
+    &__card {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        background-color: $c-white;
+        width: 100%;
+        max-width: 300px;
+        padding: 50px 0 23px 0;
+        margin: 0 auto;
+        border-radius: 14px;
+        box-shadow: 0px 15px 11px 1px rgba(0, 0, 0, 0.09);
+
+        @include breakpoint(lg) {
+            &:nth-of-type(1) {
+                align-self: flex-start;
+            }
+
+            &:nth-of-type(2) {
+                align-self: center;
+            }
+
+            &:nth-of-type(3) {
+                align-self: flex-end;
+            }
+        }
+
+        &::before {
+            position: absolute;
+            content: "";
+            bottom: 90px;
+            left: 0;
+            background-image: url("/images/bg-dots.svg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 10px;
+        }
+    }
+
+    &__img-wrapper {
+        height: 110px;
+    }
+
+    &__card-img {
+        width: 101px;
+    }
+
+    &__card-title {
+        margin-top: 22px;
+    }
+
+    &__card-text {
+        margin-top: 7px;
+    }
+
+    &__card-cta {
+        margin-top: 62px;
+    }
+}

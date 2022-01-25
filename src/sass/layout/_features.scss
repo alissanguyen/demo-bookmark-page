@@ -1,0 +1,307 @@
+@use '../utilities/' as *;
+
+.features {
+    $root: &;
+    overflow: hidden;
+    padding: 0 32px;
+
+    @include breakpoint(md) {
+        padding: 0 24px;
+    }
+
+    &__container {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        padding-bottom: 153px;
+
+        @include breakpoint(lg) {
+            padding-bottom: 206px;
+        }
+    }
+
+    &__text {
+        margin-top: 13px;
+        max-width: 550px;
+        text-align: center;
+
+        @include breakpoint(lg) {
+            margin-top: 23px;
+        }
+    }
+
+    &__tab-controls {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        margin-top: 39px;
+        width: 100%;
+        max-width: 550px;
+
+        @include breakpoint(md) {
+            flex-flow: row;
+            text-align: left;
+            margin-top: 52px;
+            width: 80%;
+            max-width: 732px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid lighten($c-blue-grayish, 30);
+        }
+    }
+
+    &__tab-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+
+        @include breakpoint(md) {
+            &:nth-of-type(1):checked ~ #{$root}__tab-bar::before {
+                left: 0;
+            }
+    
+            &:nth-of-type(2):checked ~ #{$root}__tab-bar::before {
+                left: 33.34%;
+            }
+    
+            &:nth-of-type(3):checked ~ #{$root}__tab-bar::before {
+                left: 100%;
+                transform: translateX(-100%);
+            }
+        }
+
+        &:checked + #{$root}__tab-label {
+            color: $c-blue-dark;
+        }
+
+        &:checked + #{$root}__tab-label::before {
+            opacity: 1;
+            width: 60%;
+        }
+
+        &:focus-visible ~ #{$root}__tab-overlay {
+            outline: 2px dashed $c-red-soft;
+            outline-offset: 2px;
+        }
+    }
+
+    &__tab-label {
+        position: relative;
+        font-size: 1.06rem;
+        border-top: 1px solid lighten($c-blue-grayish, 30);
+        padding: 18px 0;
+        color: lighten($c-black, 45);
+        user-select: none;
+        transition: color 350ms ease-in;
+
+        &.active {
+            pointer-events: none;
+        }
+        
+        @include breakpoint(md) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: unset;
+            width: 100%;
+            cursor: pointer;
+
+            &:hover {
+                color: $c-red-soft;
+            }
+        }
+
+        &::before {
+            position: absolute;
+            content: '';
+            bottom: -1px;
+            left: 50%;
+            width: 0%;
+            height: 4px;
+            background-color: $c-red-soft;
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: width 300ms ease-in,
+                        opacity 200ms ease-in;
+            z-index: 1;
+
+            @include breakpoint(md) {
+                display: none;
+            }
+        }
+
+        &:last-of-type {
+            border-bottom: 1px solid lighten($c-blue-grayish, 30);
+            
+            @include breakpoint(md) {
+                border-bottom: unset;
+            }
+        }
+
+        &:not(:last-of-type) {
+            &::before {
+                bottom: -1px;
+            }
+        }
+    }
+
+    &__tab-bar {
+        display: none;
+
+        @include breakpoint(md) {
+            position: absolute;
+            display: inline;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+
+            &::before {
+                position: absolute;
+                content: '';
+                bottom: -1px;
+                left: 0;
+                width: 33%;
+                height: 4px;
+                background-color: $c-red-soft;
+                z-index: 1;
+                transition: left 300ms ease-in-out,
+                            transform 300ms ease-in-out;
+            }
+        }
+    }
+    
+    &__tab-overlay {
+        position: absolute;
+        inset: 0 0 0 0;
+        pointer-events: none;
+    }
+
+    &__tab-content {
+        width: 100%;
+        margin-top: 42px;
+
+        @include breakpoint(md) {
+            display: flex;
+            margin-top: 0;
+            padding: 0 24px;
+        }
+
+        @include breakpoint(lg) {
+            margin-top: 33px;
+            padding: 0;
+        }
+
+        &.animation {
+            #{$root}__tab-illustration-img {
+                animation: tabBackgroundSlide 1000ms ease-in-out;
+            }
+
+            #{$root}__tab-info {
+                animation: tabInfoSlide 1000ms ease-in-out;
+            }
+        }
+    }
+
+    &__tab-illustration {
+        position: relative;
+        width: 100%;
+        height: 70vw;
+        max-width: 600px;
+        max-height: 426px;
+        margin: 0 auto;
+
+        @include breakpoint(md) {
+            background-size: 89.4%;
+            background-position: left;
+            margin-left: 4px;
+            width: 50%;
+        }
+        
+        @include breakpoint(lg) {
+            width: 60%;
+        }
+
+        &::before {
+            position: absolute;
+            content: "";
+            top: clamp(66px, 17vw, 105px);
+            right: 18vw;
+            width: 100vw;
+            height: 54vw;
+            max-height: 324px;
+            background-color: $c-blue-soft;
+            border-radius: 0 100px 100px 0;
+            z-index: -1;
+
+            @include breakpoint(md) {
+                top: 160px;
+                right: 12vw;
+                height: 26vw;
+                max-height: 250px;
+            }
+
+            @include breakpoint(lg) {
+                top: clamp(66px, 17vw, 123px);
+                right: 9vw;
+                height: 54vw;
+                max-height: 352px;
+                border-radius: 0 180px 180px 0;
+            }
+        }
+    }
+
+    &__tab-illustration-img {
+        background-image: url('/images/illustration-features-tab-1.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+
+        @include breakpoint(md) {
+            background-size: 89.4%;
+            background-position: left;
+        }
+    }
+
+    &__tab-info {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        margin-top: 51px;
+
+        @include breakpoint(md) {
+            align-items: flex-start;
+            width: 50%;
+            margin-top: 145px;
+        }
+        
+        @include breakpoint(lg) {
+            width: 40%;
+            margin-top: 105px;
+        }
+    }
+
+    &__tab-text {
+        max-width: 550px;
+        margin-top: 13px;
+        text-align: center;
+
+        @include breakpoint(md) {
+            margin-top: 23px;
+            text-align: left;
+        }
+    }
+
+    &__tab-cta {
+        display: none;
+
+        @include breakpoint(md) {
+            display: flex;
+            margin-top: 33px;
+        }
+    }
+}

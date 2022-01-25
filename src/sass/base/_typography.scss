@@ -1,0 +1,37 @@
+@use '../utilities/' as *;
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 1.125rem;
+    font-family: $ff-primary;
+}
+
+/* Anchor elements */
+a {
+    text-decoration: none;
+    color: inherit;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px dashed $c-red-soft;
+        outline-offset: 2px;
+    }
+}
+
+/* Button elements */
+button {
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px dashed $c-red-soft;
+        outline-offset: 2px;
+    }
+}
